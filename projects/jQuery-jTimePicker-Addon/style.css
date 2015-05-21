@@ -1,0 +1,91 @@
+pre {
+    font-size: 12px; 
+    line-height: 16px; 
+    border-left: solid 5px #9EC45F; 
+    overflow: auto; 
+    tab-size: 4; 
+    -moz-tab-size: 4; 
+    -o-tab-size: 4; 
+    -webkit-tab-size: 4; 
+}
+.container { 
+    width: 80%;
+    margin: 0 auto;
+}
+.example-container input { 
+    border: solid 1px #aaa; 
+    padding: 4px; 
+    width: 175px; 
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    direction: rtl;
+}
+.example-container > div {
+    background-color: #f4f4f4; 
+    border-bottom: solid 2px #777777; 
+    margin: 0 0 20px 40px; 
+    padding: 20px;
+}
+h3 {
+    direction: rtl;
+    text-align: right;
+    font-family: '0 Titr Bold';
+    background-color: #efefef;
+}
+h1 {
+    text-align: center;
+    direction: rtl;
+    font-family: '0 Titr Bold';
+}
+h2 {
+    direction: rtl;
+    text-align: right;
+    font-family: '0 Titr Bold';
+    color: #004746;
+}
+.desc {
+    text-align: center;
+    direction: rtl;
+    font-family: '0 Titr Bold';
+    color: #747474;
+}
+.example-container h2::before {
+    content: "2. ";
+    font-family: '0 Titr Bold';
+    color: #9f0043;
+}
+.intro-container h2::before {
+    content: "1. ";
+    font-family: '0 Titr Bold';
+    color: #9f0043;
+}
+.dwn-container h2::before {
+    content: "3. ";
+    font-family: '0 Titr Bold';
+    color: #9f0043;
+}
+hr {
+    color: yellow;
+}
+p, ul, ol {
+    font-family: 'B Mitra';
+    direction: rtl;
+    text-align: justify;
+    font-size: 22px;
+}
+li {
+    margin: 0 40px;
+}
+.signature {
+    width: 251px;
+    margin:5px auto;
+}
+.signature a {
+    text-decoration: none;
+}
+.menu {
+    position: fixed;
+    top: 2px;
+    left: 2px;
+}

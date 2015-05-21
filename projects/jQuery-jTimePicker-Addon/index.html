@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Iconset from: http://www.iconarchive.com/show/100-flat-icons-by-graphicloads.html
+        Syntax Highlighter: https://highlightjs.org/
+        Smooth scroller: https://css-tricks.com/snippets/jquery/smooth-scrolling
+    -->
+    <title>jQuery jTimepicker Addon - Example</title>
+
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" media="screen" type="text/css" href="jquery-ui.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="jquery-ui-timepicker-addon.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="jquery-ui.structure.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="jquery-ui.theme.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="style.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="highlight.css" />
+    <link href='http://awebfont.ir/css?id=1939|1062|1116' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="jquery-ui-timepicker-cc.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-timepicker-addon.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-timepicker-addon-i18n.js"></script>
+    <script type="text/javascript" src="highlight.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    jQuery(function($){
+        $.datepicker.regional['fa'] = {
+            calendar: JalaliDate,
+            isRTL: true,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            calculateWeek: function(date) {
+                var checkDate = new JalaliDate(date.getFullYear(), date.getMonth(), date.getDate() + (date.getDay() || 7) - 3);
+                return Math.floor(Math.round((checkDate.getTime() - new JalaliDate(checkDate.getFullYear(), 0, 1).getTime()) / 86400000) / 7) + 1;
+            }
+        };
+
+        $.datepicker.setDefaults($.datepicker.regional['fa']);
+    });
+</script>
+<div class="container">
+    <h1 class="title">زمان‌بردار جلالی</h1>
+    <h4 class="desc">افزونه‌ی جکوئری برای استفاده‌ی همزمان از تاریخ جلالی و زمان در یک ویدجت</h4>
+    <div class="intro-container" id="introduction">
+    <h2>درباره</h2>
+    <p>
+        این افزونه، ترکیبی است از روش جلالی‌سازی تقویم جکوئری در <a href="http://hasheminezhad.com/datepicker">اینجا</a> توسط مهدی هاشمی‌نژاد و افزونه‌ی TimePicker توسط Trent Richardson در <a href="http://trentrichardson.com/examples/timepicker/">اینجا</a>. کلیت کار همان است که در پست هاشمی‌نژاد آمده است و من به جز چند اصلاح کوچک در افزونه‌ی TimePicker و اعمال تغییرات بر نسخه‌ی 1.9.2 افزونه‌ی TimePicker جکوئری به عنوان آخرین نسخه‌ی موجود از سری یک، کاری نکرده‌ام. به رسم خوب آقای هاشمی‌نژاد، تمامی تغییرات اعمالی بر افزونه‌ها، با توضیح‌گذاری <span style="color:green">[CC]</span> مشخص شده‌اند.
+    </p>
+    <p>در مورد این پلاگین می‌توانید در <a href="http://meysampg.blog.ir/post/30/">اینجا</a> بیشتر بخوانید. پیشنهاد من برای استفاده به این صورت است که اگر
+        <ul>
+            <li>تنها به تقویم نیاز دارید، از نسخه‌ی موجود در سایت هاشمی‌نژاد استفاده کنید. در آن نسخه، امکان استفاده همزمان از تاریخ هجری قمری، میلادی و سایر تقویم‌ها وجود دارد.</li>
+            <li>به استفاده از تقویم و زمان به صورت همزمان نیاز دارید، از افزونه‌ی واقع در این صفحه استفاده کنید. این افزونه امکان استفاده از سایر تقویم‌ها را ندارد، اما توسط خودم برای نیاز خودم تست شده است و احتمالا با نسخه‌های بعدی جکوئری و یا افزونه‌ی اصلی نیز بروز می‌شود :).</li>
+        </ul>
+    </p>
+    <p>
+        این افزونه تحت مجوز MIT منتشر می‌شود. یک نسخه از اجازه‌نامه‌ی مذکور را می‌توانید در <a href="https://tldrlegal.com/license/mit-license">اینجا</a> ببینید.
+    </p>
+    </div>
+    <hr />
+    <div class="example-container" id="examples">   
+        <h2>مثال‌ها</h2>     
+        <div>
+            <h3>انتخاب زمان و تاریخ</h3>
+            <p></p>
+            <input type="text" name="basic_example_1" id="basic_example_1" value="" />
+            <pre><code class="javascript">$('#basic_example_1').datetimepicker();</code></pre>
+        </div>   
+
+        <div>
+            <h3>انتخاب زمان</h3>
+            <p></p>
+            <input type="text" name="basic_example_2" id="basic_example_2" value="" />
+            <pre><code class="javascript">$('#basic_example_2').timepicker();</code></pre>
+        </div>
+
+        <p></p>
+        <div>
+            <h3>انتخاب زمان و تاریخ در قالب مشخص</h3>
+            <p></p>
+            <input type="text" name="basic_example_3" id="basic_example_3" value="" />
+            <pre><code class="javascript">$('#basic_example_3').datetimepicker({
+    timeFormat: "hh:mm tt"
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>بومی‌سازی</h3>
+            <p></p>
+            <input type="text" name="basic_example_4" id="basic_example_4" value="" />
+            <pre><code class="javascript">$('#basic_example_4').timepicker(
+    $.timepicker.regional['tr']
+);</code></pre>
+        </div>
+
+        <div>
+            <h3>استفاده از منطقه زمانی</h3>
+            <p></p>
+            <input type="text" name="timezone_example_1" id="timezone_example_1" value="" />
+            <pre><code class="javascript">$('#timezone_example_1').datetimepicker({
+    timeFormat: 'hh:mm tt z'
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>تعریف منطقه زمانی دلخواه</h3>
+            <p></p>
+            <input type="text" name="timezone_example_2" id="timezone_example_2" value="" />
+            <pre><code class="javascript">$('#timezone_example_2').datetimepicker({
+    timeFormat: 'HH:mm z',
+    timezoneList: [ 
+            { value: -300, label: 'شرقی'}, 
+            { value: -360, label: 'مرکزی' }, 
+            { value: -420, label: 'کوهستانی' }, 
+            { value: -480, label: 'جنوبی' } 
+        ]
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>تغییرات بر لغزنده</h3>
+            <p></p>
+            <input type="text" name="slider_example_1" id="slider_example_1" value="" />
+            <pre><code class="javascript">$('#slider_example_1').timepicker({
+    hourGrid: 4,
+    minuteGrid: 10,
+    timeFormat: 'hh:mm tt'
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>تعیین طول گام برای مقادیر</h3>
+            <p></p>
+            <input type="text" name="slider_example_2" id="slider_example_2" value="" />
+            <pre><code class="javascript">$('#slider_example_2').datetimepicker({
+    timeFormat: 'HH:mm:ss',
+    stepHour: 2,
+    stepMinute: 10,
+    stepSecond: 10
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>منوی انتخابی در زمان</h3>
+            <p>در انتخاب زمان، به جای استفاده از لغزنده، از منوی انتخابی استفاده نمائید. همچنین در صورتی که لغزنده در دسترس نباشد، به جای لغزنده از منوی انتخابی استفاده خواهد شد.</p>
+            <input type="text" name="slider_example_4" id="slider_example_4" value="" />
+            <pre><code class="javascript">$('#slider_example_4').datetimepicker({
+    controlType: 'select',
+    timeFormat: 'hh:mm tt'
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>استفاده از منوی انتخابی در یک خط</h3>
+            <p></p>
+            <input type="text" name="slider_example_4andHalf" id="slider_example_4andHalf" value="" />
+            <pre><code class="javascript">$('#slider_example_4andHalf').datetimepicker({
+    controlType: 'select',
+    oneLine: true,
+    timeFormat: 'hh:mm tt'
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>شخصی‌سازی زمان‌بردار</h3>
+            <p>شما می‌توانید ابزارهای کنترلی موردنیاز خود را مطابق با سلیقه‌ی خودتان و دیگر ابزارهای موجود، شخصی‌سازی کنید. پس از پیاده‌سازی شخصی‌سازی‌های دلخواه خود، از <span style="direction:ltr;display: inline-block;">$.timepicker.setDefaults({controlType:yourPleasuredCustomazation})</span> برای اعمال تغییرات استفاده کنید.</p>
+            <input type="text" name="slider_example_5" id="slider_example_5" value="" />
+            <pre><code class="javascript">var myControl=  {
+    create: function(tp_inst, obj, unit, val, min, max, step){
+        $(&#x27;&#x3C;input class=&#x22;ui-timepicker-input&#x22; value=&#x22;&#x27;+val+&#x27;&#x22; style=&#x22;width:50%&#x22;&#x3E;&#x27;)
+            .appendTo(obj)
+            .spinner({
+                min: min,
+                max: max,
+                step: step,
+                change: function(e,ui){ // key events
+                        // don&#x27;t call if api was used and not key press
+                        if(e.originalEvent !== undefined)
+                            tp_inst._onTimeChange();
+                        tp_inst._onSelectHandler();
+                    },
+                spin: function(e,ui){ // spin events
+                        tp_inst.control.value(tp_inst, obj, unit, ui.value);
+                        tp_inst._onTimeChange();
+                        tp_inst._onSelectHandler();
+                    }
+            });
+        return obj;
+    },
+    options: function(tp_inst, obj, unit, opts, val){
+        if(typeof(opts) == &#x27;string&#x27; &#x26;&#x26; val !== undefined)
+            return obj.find(&#x27;.ui-timepicker-input&#x27;).spinner(opts, val);
+        return obj.find(&#x27;.ui-timepicker-input&#x27;).spinner(opts);
+    },
+    value: function(tp_inst, obj, unit, val){
+        if(val !== undefined)
+            return obj.find(&#x27;.ui-timepicker-input&#x27;).spinner(&#x27;value&#x27;, val);
+        return obj.find(&#x27;.ui-timepicker-input&#x27;).spinner(&#x27;value&#x27;);
+    }
+};
+
+$(&#x27;#slider_example_5&#x27;).datetimepicker({
+    controlType: myControl
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>نمایش تاریخ محدودشده بین کمینه/بیشینه</h3>
+            <p></p>
+            <input type="text" name="rest_example_2" id="rest_example_2" value="" />
+            <pre><code class="javascript">$('#rest_example_2').datetimepicker({
+    numberOfMonths: 2,
+    minDate: 0,
+    maxDate: 30
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>جداسازی زمان و تاریخ</h3>
+            <p></p>
+            <div style="text-align:center">
+                <input type="text" name="alt_example_1" id="alt_example_1" value="" style="display:inline" />
+                <input type="text" name="alt_example_1_alt" id="alt_example_1_alt" value="" style="display:inline" />
+            </div>
+            <pre><code class="javascript">$('#alt_example_1').datetimepicker({
+    altField: "#alt_example_1_alt"
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>نمایش زمان به صورت‌های متفاوت</h3>
+            <p></p>
+            <div style="text-align:center">
+                <input type="text" name="alt_example_3" id="alt_example_3" value="" style="display:inline" />
+                <input type="text" name="alt_example_3_alt" id="alt_example_3_alt" value="" style="display:inline" />
+            </div>
+            <pre><code class="javascript">$('#alt_example_3').datetimepicker({
+    altField: "#alt_example_3_alt",
+    altFieldTimeOnly: false,
+    altFormat: "yy-mm-dd",
+    altTimeFormat: "h:m t",
+    altSeparator: " @ "
+});</code></pre>
+        </div>
+
+        <div>
+            <h3>نمایش به صورت درون‌خطی</h3>
+            <p></p>
+            <input type="text" name="alt_example_4_alt" id="alt_example_4_alt" value="" />
+            <span id="alt_example_4" style="margin: 11px auto 0;text-align: center; display: block; width: 300px;"></span>
+            <pre><code class="javascript">$('#alt_example_4').datetimepicker({
+    altField: "#alt_example_4_alt",
+    altFieldTimeOnly: false
+});</code></pre>
+        </div>
+
+        <div style="border-bottom: none;">
+            <h3>مثال‌های بیشتر…</h3>
+            <p>برای دیدن کاربردها و نمونه‌های بیشتری از این افزونه، به صفحه‌ی مثال‌های افزونه اصلی، واقع در <a href="http://trentrichardson.com/examples/timepicker/#tp-examples">اینجا</a> مراجعه نمائید.</p>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#basic_example_1').datetimepicker();
+                $('#basic_example_2').timepicker();
+                $('#basic_example_3').datetimepicker({
+                    timeFormat: "hh:mm tt"
+                });
+                $('#basic_example_4').timepicker(
+                    $.timepicker.regional['tr']
+                );
+                $('#timezone_example_1').datetimepicker({
+                    timeFormat: 'hh:mm tt z'
+                });
+                $('#timezone_example_2').datetimepicker({
+                    timeFormat: 'HH:mm z',
+                    timezoneList: [ 
+                        { value: -300, label: 'شرقی'}, 
+                        { value: -360, label: 'مرکزی' }, 
+                        { value: -420, label: 'کوهستانی' }, 
+                        { value: -480, label: 'جنوبی' } 
+                    ]
+                });
+                $('#slider_example_1').timepicker({
+                    hourGrid: 4,
+                    minuteGrid: 10,
+                    timeFormat: 'hh:mm tt'
+                });
+                $('#slider_example_2').datetimepicker({
+                    timeFormat: 'HH:mm:ss',
+                    stepHour: 2,
+                    stepMinute: 10,
+                    stepSecond: 10
+                });
+                $('#slider_example_4').datetimepicker({
+                    controlType: 'select',
+                    timeFormat: 'hh:mm tt'
+                });
+                $('#slider_example_4andHalf').datetimepicker({
+                    controlType: 'select',
+                    oneLine: true,
+                    timeFormat: 'hh:mm tt'
+                });  
+                var myControl=  {
+                    create: function(tp_inst, obj, unit, val, min, max, step) {
+                        $('<input class="ui-timepicker-input" value="'+val+'" style="width:50%">')
+                        .appendTo(obj)
+                        .spinner({
+                            min: min,
+                            max: max,
+                            step: step,
+                            change: function(e,ui){ // key events
+                            // don't call if api was used and not key press
+                                if(e.originalEvent !== undefined)
+                                    tp_inst._onTimeChange();
+                            tp_inst._onSelectHandler();
+                            },
+                            spin: function(e,ui){ // spin events
+                                tp_inst.control.value(tp_inst, obj, unit, ui.value);
+                                tp_inst._onTimeChange();
+                                tp_inst._onSelectHandler();
+                            }
+                        });
+                        return obj;
+                    },
+                    options: function(tp_inst, obj, unit, opts, val){
+                        if(typeof(opts) == 'string' && val !== undefined)
+                            return obj.find('.ui-timepicker-input').spinner(opts, val);
+                        return obj.find('.ui-timepicker-input').spinner(opts);
+                    },
+                    value: function(tp_inst, obj, unit, val){
+                        if(val !== undefined)
+                            return obj.find('.ui-timepicker-input').spinner('value', val);
+                        return obj.find('.ui-timepicker-input').spinner('value');
+                    }
+                };
+
+                $('#slider_example_5').datetimepicker({
+                    controlType: myControl
+                });
+
+                $('#alt_example_1').datetimepicker({
+                    altField: "#alt_example_1_alt"
+                });
+
+                $('#alt_example_3').datetimepicker({
+                    altField: "#alt_example_3_alt",
+                    altFieldTimeOnly: false,
+                    altFormat: "yy-mm-dd",
+                    altTimeFormat: "h:m t",
+                    altSeparator: " @ "
+                });
+
+                $('#alt_example_4').datetimepicker({
+                    altField: "#alt_example_4_alt",
+                    altFieldTimeOnly: false,
+                });
+
+                $('#rest_example_2').datetimepicker({
+                    numberOfMonths: 2,
+                    minDate: 0,
+                    maxDate: 30,
+                });
+
+                hljs.initHighlightingOnLoad();   
+
+                $(function() {
+                    $('a[href*=#]:not([href=#])').click(function() {
+                        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                                var target = $(this.hash);
+                                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                                if (target.length) {
+                                    $('html,body').animate({
+                                        scrollTop: target.offset().top
+                                    }, 1000);
+                                    
+                                    return false;
+                                }
+                        }
+                    }).tooltip();
+                });
+            });
+        </script>
+    </div>
+    <hr />
+    <div class="dwn-container" id="download">
+    <h2>دانلود</h2>
+    <p>
+        مخزن افزونه در گیت‌هاب در <a href="https://github.com/meysampg/jQuery-jTimepicker-Addon">اینجا</a> در دسترس است و می‌توان افزونه را از آن دانلود نمود. برای استفاده از افزونه، انجام مراحل زیر موردنیاز است:
+        <ol>
+            <li>
+                آخرین نسخه‌ی موجود از سری ۱ کتابخانه جکوئری را از <a href="https://jquery.com/download/">اینجا</a> دانلود و در صفحه‌ی موردنظر بارگذاری کنید (آخرین نسخه در ۳۱ اردیبهشت ۱۳۹۴ نسخه‌ی 1.11.3 است.).
+            </li>
+            <li>
+                آخرین نسخه‌ی موجود از سری ۱ جکوئریUI را از <a href="http://jqueryui.com/download/">اینجا</a> دانلود کرده و به صفحه‌ی مذکور اضافه نمائید (آخرین نسخه‌ی موجود در ۳۱ اردیبهشت ۱۳۹۴ نسخه‌ی 1.11.4 است.). نسخه‌ی مذکور <strong>باید</strong> شامل افزونه‌ی Slider باشد. در صورتی که می‌خواهید بازشدن و بسته‌شدن تقویم دارای افکت باشد، افکت‌ها نیز بایستی جزئی از افزونه باشند.
+            </li>
+            <li>
+                افزونه‌ی تغییریافته‌ی TimePicker را از <a href="jquery-ui-timepicker-cc.js">اینجا</a> دانلود کنید و به صفحه‌ی مذکور اضافه نمائید. نسخه‌ی فشرده‌ی این افزونه را می‌توان <a href="jquery-ui-timepicker-cc.min.js">اینجا</a> یافت.
+            </li>
+            <li>
+                افزونه‌ی تغییریافته‌ی DateTimePicker را از <a href="jquery-ui-timepicker-addon.js">اینجا</a> دریافت نمائید و به صفحه‌ی مذکور اضافه نمائید. نسخه‌ی فشرده‌ی این افزونه در <a href="jquery-ui-timepicker-addon.min.js">اینجا</a> قرار دارد.
+            </li>
+            <li>
+                مطابق با مثال‌های موجود در بخش دوم، نسبت به استفاده از افزونه اقدام کنید.
+            </li>
+        </ol>
+    </p>
+    </div>
+    <div class="signature">
+        <a href="http://meysampg.github.io">
+            <img src="images/signature.png" />
+        </a>
+        <a href="http://zentex.ir">
+            <img src="images/zentex.png" />
+        </a>
+    </div>
+</div>
+<div class="menu">
+    <a href="#introduction"><img src="images/home-icon.png" alt="درباره پلاگین" title="رفتن به بخش درباره پلاگین" /></a>
+    <a href="#examples"><img src="images/laboratory-icon.png" alt="مثال‌ها" title="رفتن به بخش مثال‌ها" /></a>
+    <a href="#download"><img src="images/download-icon.png" alt="دانلود پلاگین" title="رفتن به بخش دانلود پلاگین" /></a>
+</div>
+</body>
+</html>
