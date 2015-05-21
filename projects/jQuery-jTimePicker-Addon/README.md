@@ -1,29 +1,12 @@
-jQuery Timepicker Addon
-=======================
+# jQuery jDateTimePicker Addon #
+## About ##
+The jDateTimePicker addon adds a timepicker to jQuery UI Datepicker with support Jalali calendar. Main main plugin can be found [here](http://trentrichardson.com/examples/timepicker) and a guide for adding Jalali calendar support to jQueryUI that used on this plugin can be found [here](http://hasheminezhad.com/datepicker).
 
-About
------
-- Author: [Trent Richardson](http://trentrichardson.com)
-- Documentation: [http://trentrichardson.com/examples/timepicker/](http://trentrichardson.com/examples/timepicker/)
-- Twitter: [@practicalweb](http://twitter.com/practicalweb)
+## Introduction ##
+An introduction (On persian) can be found [here](http://pourganji.ir/projects/jQuery-jTimePicker-Addon), also my blog post about this plugin is [here](http://meysampg.blog.ir/post/30).
 
-Use
----
-I recommend getting the eBook [Handling Time](https://sellfy.com/p/8gxZ) as it has a lot of example code to get started.  The quick and dirty:
+## Version ##
+This is not an independent plugin, so i prefer that don't put a version on it ;).
 
-- To use this plugin you must include jQuery (1.6+) and jQuery UI with datepicker (and optionally slider).
-- Include timepicker-addon script and css located in the `dist` directory or from a CDN:
-  * [http://cdnjs.com/libraries/jquery-ui-timepicker-addon](http://cdnjs.com/libraries/jquery-ui-timepicker-addon)
-  * [http://www.jsdelivr.com/#!jquery.ui.timepicker.addon](http://www.jsdelivr.com/#!jquery.ui.timepicker.addon)
-- now use timepicker with `$('#selector').datetimepicker()` or `$('#selector').timepicker()`.
-
-There is also a [Bower](http://bower.io/) package named `jqueryui-timepicker-addon`.  Beware there are other similar package names that point to forks which may not be current.
-
-Contributing Code - Please Read!
---------------------------------
-- All code contributions and bug reports are much appreciated.
-- Please be sure to apply your fixes to the "dev" branch.
-- Also note tabs are appreciated over spaces.
-- Please read the [CONTRIBUTING.md][contributingmd] for more on using Grunt to produce builds.
-
-[contributingmd]: CONTRIBUTING.md
+## License ##
+This plugin is under MIT license, a copy of it can be found [here](https://tldrlegal.com/license/mit-license).
