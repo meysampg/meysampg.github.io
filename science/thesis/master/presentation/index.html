@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Two Dimensional Interpolation by Convexity Preserving Splines</title>
+    
+    <meta name="description" content="In this work, we aim to construct interpolating splines, which preserves convexity of the original data. To do so we mention that why we need two-dimensional shape-preserving interpolation and why the one-dimensional techniques cannot be used here. In the sequel, the abstract spaces and tools, which are needed for setting the scene, are introduced. The most important tool is triangulation, which is one of interesting and open problems of computational geometry. Triangulation gives us the opportunity to look at the points in the plane from Barycentric coordinates, which is a local coordinate and allows us to use new bases of two-variable polynomials. These are actually
+two-variable Bernstein bases and a natural extension of the one-variable case. This new basis is used to have Bernstein-Bezier representation of polynomials. Using this new representation, concepts like directional derivative, smoothness and convexity conditions are revisited. The convexity conditions are non-linear equations and for linearising, we use blossoming. This tool makes it possible to transform a one-variable polynomial to a several-variable function of monomials. This thesis concludes with numerical examples of implementing the mentioned algorithms." />
+    <meta name="author" content="Meysam Piur Ganji" />
+    
+    <link href="css/impress.css" rel="stylesheet" />
+    <link href="css/impress-progress.css" rel="stylesheet" />
+    <link href="css/substep.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$','$']]}
+        });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+    <div id="bored" class="step slide" data-x="4000" data-y="-4500" data-z="1000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="2">
+        <q class="title">درونیابی دوبعدی با اسپلاین‌های حافظ تحدب</q>
+        <p class="titre">میثم پورگنجی</p>
+    </div>
+
+    <div class="step slide" data-x="-1000" data-y="-1500">
+        <q class="title">درونیابی دوبعدی</q>
+    </div>
+    
+    <div class="step slide" data-x="0" data-y="-1500">
+        <q class="titre">شرح مسأله‌ی درونیابی دومتغیره</q>
+        <p class="substep">
+            مسأله درونیابی دومتغیره:
+            $$\left\{(x_1,y_1,z_1),\dots,(x_n,y_n,z_n)\right\}$$
+            $$\downarrow$$
+            $$f(x_i,y_i) = z_i,\quad i=1,\dots,n$$
+        </p>
+        <p class="substep">
+            فضای چندجمله‌ای دومتغیره $\mathcal{P}_d$: فضای برداری توابع حقیقی‌مقدار به شکل
+            $$p(x,y) = c_{ij}x^iy^j,\quad 0\le i+j \le d$$
+        </p>
+    </div>
+    <div class="step slide" data-x="1000" data-y="-1500">
+        <q class="titre">چرایی مسأله درونیابی دومتغیره</q>
+        <p class="substep">
+            تعمیم حالت یک بعدی:
+            $$\mathcal{P}_d = \left<\left\{g_i\right\}_{i=1}^n\right>$$
+            $$\{t_i\}_{i=1}^n\subseteq\mathbb{R}^2$$
+            $$\{z_i\}_{i=1}^n$$
+        </p>
+        <p class="substep">
+            چندجمله‌ای درونیاب:
+            $$f(t_i)=z_i,\quad i=1,\dots,n$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="-1500">
+        <p>
+            $$\exists \{c_i\}_{i=1}^n, f = \sum_{i=1}^nc_ig_i$$
+        </p>
+        <p class="substep">
+            اعمال شروط درونیابی:
+            $$\sum_{i=1}^nc_ig_i(t_j)=z_j,\quad j=1,\dots,n$$
+        </p>
+        <p class="substep">
+            صورت ماتریسی:
+            $$Mc=z$$
+        </p>
+    </div>
+    <div class="step slide" data-x="2000" data-y="-700">
+            $$M=\begin{bmatrix}
+                    g_1(t_1) & \dots & g_n(t_1)\\
+                    \vdots & \ddots & \vdots\\
+                    g_1(t_n) & \dots & g_n(t_n)
+                \end{bmatrix}
+            $$
+        <p class="substep" style="color: blue; text-align:center">
+            یک مورد خاص: درونیاب در فضای $\mathcal{P}_1$ برای گره‌های واقع بر یک خط
+        </p>
+        <center>
+        <p class="substep">
+            $\mathcal{P}_1 = \left<1,x,y\right>$
+        </p>
+        <p class="substep">
+            گره‌ها واقع بر معادله خط $y=ax+b$: $\left\{(x_1,ax_1+b),(x_2,ax_2+b),(x_3,ax_3+b)\right\}$
+        </p>
+        </center>
+        <p class="substep">
+            $$M=\begin{bmatrix}
+                    1 & x_1 & y_1\\
+                    1 & x_2 & y_2\\
+                    1 & x_3 & y_3
+                \end{bmatrix} = 
+                \begin{bmatrix}
+                    1 & x_1 & ax_1+b\\
+                    1 & x_2 & ax_2+b\\
+                    1 & x_3 & ax_3+b
+                \end{bmatrix}
+            $$
+        </p>
+    </div>
+    <div class="step slide" data-x="1000" data-y="-700">
+        <q style="color: green; text-align:center; font-size: 50px;">
+        آیا می‌توان شرایطی را بر مسئله تحمیل نمود تا درونیاب به صورت یکتا مشخص شود؟
+        </q>
+        <q class="substep titre" style="margin-top: 90px !important">
+        بلی! :)
+        </q>
+    </div>
+    <div class="step slide" data-x="0" data-y="-700">
+        <q class="titre">توازن نقاط</q>
+        <p>
+        <span style="color:brown">تعریف)</span>
+        مجموعه نقاط گره‌ای، نسبت به $\mathcal{P}_d$ متوازن گفته می‌شود، هرگاه ماتریس $M$ نامنفرد باشد.
+        </p>
+        <p class="substep" style="text-align:justify">
+        <span style="color:green">شرط کافی برای متوازن بودن)</span>
+        گیریم $d$ یک عدد صحیح مثبت مفروض باشد، قرار می‌دهیم 
+$n = \left(\begin{matrix}
+d+2\\ 2
+\end{matrix}\right)$.
+ فرض کنیم 
+$A = \{t_i\}_{i=1}^n = \cup_{i=1}^{d+1}\{t_{ij}\}_{j=1}^i$،
+یک مجموعه از نقاط دو به دو متمایز در $\mathbb{R}^2$ چنان باشند که برای گردایه‌ای چون
+$\{L_i\}_{i=1}^{d+1}$
+از خطوط مجزا در صفحه، برای هر $i=1,\dots,d+1$ نقاط 
+$\{t_{ij}\}_{j=1}^i$
+در $L_i$ صدق کنند اما در 
+$L_{i+1}\cup\dots\cup L_{d+1}$
+صدق نکنند. در این صورت $A$ نسبت به $\mathcal{P}_d$ متوازن است.
+        </p>
+    </div>
+    <div class="step slide" data-x="-1000" data-y="-700">
+        <q class="titre">یک نمونه کاربردی از نقاط متوازن</q>
+        <p class="substep">
+            گیریم $T$ یک مثلث با رئوس $v_1$، $v_2$ و $v_3$ باشد و 
+\begin{equation}
+\label{15_ordi_eq_1}
+\xi_{ijk} = \frac{(iv_1+jv_2+kv_3)}{d},\quad i+j+k = d.
+\end{equation}
+در این صورت مجموعه‌ی متشکل از 
+$\left(\begin{matrix}
+d+2\\2
+\end{matrix}\right)$
+نقطه‌ی 
+$A=\{\xi_{ijk}\}_{i+j+k=d}$
+نسبت به $\mathcal{P}_d$ متوازن است.
+<img src="img/poised_point.png" style="z-index: -5; position: absolute; bottom: 0; left: 0; opacity: .5;" />
+        </p>
+    </div>
+    <div class="step slide" data-x="-1000" data-y="100">
+        <q class="titre">مثلث‌سازی</q>
+        <center class="substep"><img src="img/me.png" style="width: 500px;" /></center>
+    </div>
+
+    <div class="step slide" data-x="0" data-y="100">
+        <p>
+        <span style="color: green">تعریف)</span> به پوسته‌ی محدب تولید شده توسط سه نقطه بر صفحه، مثلث می‌گوئیم.
+        </p>
+        <p class="substep">
+        <span style="color: green">تعریف) </span> به گردایه‌ی $$\bigtriangleup=\{T_1,\dots,T_N\}$$ از مثلث‌های واقع بر صفحه، یک مثلث‌سازی از 
+$$\Omega=\cup_{i=1}^NT_i$$
+گفته می‌شود، هرگاه هر جفت از مثلث‌های $\bigtriangleup$ حداکثر در یک رأس یا در یک یال اشتراک داشته باشند.
+        </p>
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="100">
+        <q class="titre">مختصات گرانیگاهی</q>
+        <center>
+        <div class="substep" style="display: block;">
+            <span style="color:red;float: right; padding: 130px 0 0 45px;">مختصات دکارتی (دستگاه جهانی)</span>
+            <img src="img/ccs.png" />
+        </div>
+        <div class="substep" style="display: block">
+            <span style="color: green;float: left; padding: 95px 45px 0 50px;">مختصات گرانیگاهی (دستگاه محلی)</span>
+            <img src="img/bcs.png" />
+        </div>
+        </center>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="100">
+        <p style="text-align: center">
+        <img src="img/bcs.png" />  
+        $$v = b_1v_1 + b_2v_2 + b_3v_3$$
+        $$b_1+b_2+b_3 = 1$$ 
+        </p>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="900">
+        <q class="titre">چنجمله‌ای‌های پایه‌ای برنشتاین</q>
+        <p class="substep">
+        $$v = (b_1,b_2,b_3) \rightarrow B_{ijk}^d(v) = \frac{d!}{i!j!k!}b_1^ib_2^jb_3^k$$
+        </p>
+        <p class="substep">
+        $$\mathcal{P}_d = \left< \left\{B_{ijk}^d\right\}_{i+j+k=d} \right>$$
+        </p>
+        <p class="substep">
+        چند خاصیت خوب:
+        $$0 \le B_{ijk}^d(v) \le 1,\quad \forall v\in T$$
+        $$\sum_{i+j+k=d}B_{ijk}^d(v) = 1, \forall v\in T$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="900">
+        <q class="titre">$B$-فرم</q>
+        <p class="substep" style="margin-right: -125px !important;">
+        $$\forall p\exists\{c_{ijk}\}_{i+j+k=d}\left( p\in\mathcal{P}_d\Rightarrow p(v) = \sum_{i+j+k=d}c_{ijk}B_{ijk}^d(v) \right)$$
+        </p>
+        <p class="substep">
+        <span style="color: brown;">
+        چند نامگذاری:
+        </span>
+        <ul>
+            <li class="substep">$B$-ضرایب: $\{c_{ijk}\}$</li>
+            <li class="substep">$B$-چندجمله‌ای: <center>$p(v) = \sum_{i+j+k=d} c_{ijk}B_{ijk}^d(v)$</center></li>
+        </ul>
+        </p>
+    </div>
+
+    <div class="step slide" data-x="0" data-y="900">
+        <q class="titre">مشتق جهتی</q>
+        <p>
+        <span style="color: green">تعریف)</span>
+        $$D_uf(v) = \frac{d}{dt}(v + tu)|_{t=0}$$
+        </p>
+        <p class="substep">
+        <span style="color: red">مختصات جهتی</span>
+        $$\overset{\rightarrow}{u} = \overset{\rightarrow}{w} - \overset{\rightarrow}{\tilde{w}} = (a_1,a_2,a_3)$$
+        $$a_i = \alpha_i-\beta_i$$
+        $$w = (\alpha_1,\alpha_2,\alpha_3), \tilde{w} = (\beta_1,\beta_2,\beta_3)$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-1000" data-y="900">
+        <p>
+        $$c^{(0)}_{ijk}(a) = c_{ijk}$$
+        $$c^{(l)}_{ijk}(a) = a_1c^{(l-1)}_{ijk}(a)+a_2c^{(l-1)}_{ijk}(a)+a_3c^{(l-1)}_{ijk}(a)^*$$
+        </p>
+        <p class="substep">
+        $$D_u^mp(v) = \frac{d!}{(d-m)!}\sum_{i+j+k=d-m}c_{ijk}^{(m)}(a)B_{ijk}^{d-m}(v)$$
+        <small style="position: absolute; bottom: 5px;"><span style="color:red;">${}^*$</span>رابطه‌ی مذکور مبنای قاعده‌ای به نام الگوریتم کستل‌جو است.</small>
+        </p>
+    </div>
+
+    <div class="step slide" data-x="4000" data-y="100" data-z="3000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="3">
+        <q class="titre">تاکنون…</q>
+        <center>
+        <p>
+        ارائه‌ی شرایط کافی برای متوازن بودن نقاط و انتخاب نقاط واقع بر مثلث
+        </p>
+        <p class="substep">
+        $$\downarrow$$
+        مثلث‌سازی
+        </p>
+        <p class="substep">
+        $$\downarrow$$
+        تعریف پایه‌های برنشتاین بر یک مثلث
+        </p>
+        </center>
+    </div>
+
+    <div id="overview" class="step green" data-x="2000" data-y="-1500" data-scale="10"></div>
+</div>
+<div class="progress"><div></div></div>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/impress.js/0.5.3/impress.min.js"></script>
+    <script>impress().init();</script>
+</body>
+</html>
