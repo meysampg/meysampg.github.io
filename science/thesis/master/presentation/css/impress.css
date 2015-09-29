@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'xb_zarbold';
+    src: url('../fonts/xb_zar_bd-webfont.eot');
+    src: url('../fonts/xb_zar_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/xb_zar_bd-webfont.woff2') format('woff2'),
+         url('../fonts/xb_zar_bd-webfont.woff') format('woff'),
+         url('../fonts/xb_zar_bd-webfont.ttf') format('truetype'),
+         url('../fonts/xb_zar_bd-webfont.svg#xb_zarbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -45,7 +59,7 @@ table {
 }
 
 body {
-    font-family: 'XB Zar', sans-serif;
+    font-family: 'xb_zarbold', sans-serif;
     min-height: 740px;
 
     background: rgb(215, 215, 215);
@@ -115,7 +129,7 @@ a:focus {
     -o-box-sizing:      border-box;
     box-sizing:         border-box;
 
-    font-family: 'XB Zar', georgia, serif;
+    font-family: 'xb_zarbold', georgia, serif;
     font-weight: bold;
     font-size: 48px;
     line-height: 1.5;
@@ -150,7 +164,7 @@ a:focus {
     color: rgb(102, 102, 102);
     text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
 
-    font-family: 'XB Zar', Arial, sans-serif;
+    font-family: 'xb_zarbold', Arial, sans-serif;
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -1px;
