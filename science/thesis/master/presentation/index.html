@@ -21,6 +21,9 @@ two-variable Bernstein bases and a natural extension of the one-variable case. T
         MathJax.Hub.Config({
             tex2jax: {inlineMath: [['$','$']]}
         });
+        MathJax.Hub.Queue(
+          ["setRenderer",MathJax.Hub,"SVG"]
+        );
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
@@ -31,9 +34,17 @@ two-variable Bernstein bases and a natural extension of the one-variable case. T
 </div>
 
 <div id="impress">
-    <div id="bored" class="step slide" data-x="4000" data-y="-4500" data-z="1000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="2">
-        <q class="title">درونیابی دوبعدی با اسپلاین‌های حافظ تحدب</q>
-        <p class="titre">میثم پورگنجی</p>
+    <div id="bored" style="text-align: center; color: black;" class="step slide" data-x="4000" data-y="-4500" data-z="1000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="2">
+        <img src="img/kharazmi_logo.png" style="width:85px;" />
+        <q class="title" style="font-size: 60px !important; margin-top: 40px !important; line-height: 75px !important;">درونیابی دوبعدی با اسپلاین‌های حافظ تحدب</q>
+        <p class="titre" style="margin-top: 45px !important;">میثم پورگنجی</p>
+        <p class="titre" style="font-size: 20px; margin-bottom: -10px !important; margin-top: 35px !important;">استادان راهنما:</p>
+        <p>
+            دکتر اسمٰعيل بابليان<br />دکتر جمشید سعیدیان
+        </p>
+        <p>
+            مهر ۱۳۹۴
+        </p>
     </div>
 
     <div class="step slide" data-x="-1000" data-y="-1500">
@@ -272,9 +283,187 @@ $$\Omega=\cup_{i=1}^NT_i$$
         </center>
     </div>
 
-    <div id="overview" class="step green" data-x="2000" data-y="-1500" data-scale="10"></div>
+    <div class="step slide" data-x="4550" data-y="-2050" data-rotate="0">
+        <q class="title">اسپلاین‌ها</q>
+    </div>
+    <div class="step slide" data-x="5550" data-y="-1650" data-rotate="0">
+        <q class="titre">
+        فضاهای اسپلاین
+        </q>
+        <p>
+        $$\mathcal{S}_d^0(\bigtriangleup) = \left\{ s\in C^0(\Omega) \middle| s\vert_T\in\mathcal{P}_d,\forall T\in\bigtriangleup \right\}$$
+        </p>
+        <p class="substep" style="margin-top: 90px;">
+        <span style="color: green;">فضاهای اسپلاین با همواری بالاتر:</span>
+        $$\mathcal{S}_d^r(\bigtriangleup) = \mathcal{S}_d^0(\bigtriangleup) \cap C^r(\Omega)$$
+        </p>
+        <p class="substep" style="color: blue; text-align: center; margin-top: 90px; font-size: 70px;">
+        تعریف کاربردی‌تر؟
+        </p>
+    </div>
+    
+    <div class="step slide" data-x="6550" data-y="-1250">
+        <p>
+            فرض کنیم 
+$T = < v_1 , v_2 , v_3 >$
+ و 
+$\tilde{T} = < \tilde{v}_4 , v_3 , v_2 >$
+  دو مثلث باشند که در یال 
+  $e=< v_2 , v_3 >$
+   مشترک هستند. گیریم
+$$p(v) = \sum_{i+j+k=d}c_{ijk}B_{ijk}^d(v),\ \ \tilde{p}(v) = \sum_{i+j+k=d}\tilde{c}_{ijk}\tilde{B}_{ijk}^d(v)$$
+که 
+$\{B_{ijk}^d\}$ و $\{\tilde{B}_{ijk}^d\}$
+چندجمله‌ای‌های پایه‌ای برنشتاین متناظر با $T$ و $\tilde{T}$ باشند. فرض کنیم $u$ یک جهت دلخواه باشد که موازی $e$ نیست. در این صورت
+$$D_u^np(v) = D_u^n\tilde{p}(v),\quad\forall v\in e, n=0,\dots,r,$$
+اگر و تنها اگر برای ${j+k=d-n, n=0,\dots,r}$
+$$\tilde{c}_{njk} = \sum_{\nu+\mu+\kappa=n}c_{\nu,k+\mu,j+\kappa}B_{\nu\mu\kappa}^n(v_4).$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="7550" data-y="-850">
+    <p>
+        واضح است که شروط به شکل
+        $$\tilde{c}_{njk} = \sum_{\nu+\mu+\kappa=n}c_{\nu,k+\mu,j+\kappa}B_{\nu\mu\kappa}^n(v_4).$$
+        را می‌توان به صورت شروطی خطی از $B$-ضرایب در نظر گرفت. بنابراین آنها را به شکل ماتریسی می‌توان به صورت
+        $$Ac = 0$$
+        نمایش داد. همچنین شرایط درونیابی $s(v_i) = z_i$ اسپلاین $s$ را می‌توان به صورت
+        $$Bc = z$$
+        نشان داد.
+    </p>
+    </div>
+
+    <div class="slide step" data-x="4000" data-y="-5700" data-z="7000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="5">
+        <q class="titre">تاکنون…</q>
+        <center>
+        <p class="substep">
+            تغییر نگرش از مختصات جهانی به مختصات محلی و مثلث‌سازی ناحیه
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            تعریف $B$-چندجمله‌ای‌ها
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            تعریف فضاهای اسپلاین و شرایط همواری با استفاده از $B$-ضرایب 
+        </p>
+        </center>
+    </div>
+
+    <div class="step slide" data-x="-3450" data-y="-2850" data-rotate="0" data-scale="0.7653333333333332">
+        <q class="title">تحدب اسپلاین‌ها</q>
+    </div>
+
+    <div class="step slide" data-x="-2466" data-y="-2849" data-rotate="0" data-scale="1">
+        <q class="titre">تحدب</q>
+        <p>
+            <span style="color: green;">تعریف) </span>
+            تابع $f$، تعریف شده بر مثلث $T$، محدب در جهت $u$ گفته می‌شود، هرگاه
+            \begin{equation*}
+            \frac{f(w_3) - f(w_2)}{|w_3-w_2|}\ge\frac{f(w_2)-f(w_1)}{|w_2-w_1|}
+            \end{equation*}
+            برای مجموعه‌ی همه‌ی نقاط مرتب $w_1$، $w_2$ و $w_3$ واقع در $T$ که در خط حاصل از بردار هادی $u$ صدق می‌کنند. گوییم $f$ محدب است اگر و تنها اگر در تمام جهات محدب باشد.
+        </p>
+        <p class="substep">
+            <span style="color: red;">صورت معادل) </span>
+            تابع $f$ در جهت $u$ محدب است اگر و تنها اگر $D_u^2f(v) \ge 0$ برای هر $v\in T$.
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-2958" data-y="-1997" data-rotate="60" data-scale="1">
+        <q class="titre">یک خبر خوب!</q>
+        <p style="text-align: center; color: brown; font-size: 40px;">
+            اگر اسپلاین $s\in\mathcal{S}_d^1(\bigtriangleup)$ چنان باشد که $s|_T$ به ازای هر $T\in\bigtriangleup$ محدب باشد، در ای صورت $s$ بر $\bigtriangleup$ محدب خواهد بود.
+        </p>
+        <p class="substep">
+            <span style="color: green">چند نماد‌گذاری:</span>
+            $$E_1c_{ijk} = c_{i+1,j,k}, E_2c_{ijk} = c_{i,j+1,k}, E_3c_{ijk} = c_{i,j,k+1}$$
+            $$\Delta_{mn}c_{ijk} = E_mc_{ijk} - E_nc_{ijk},\quad m,n\in\{1,2,3\}$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-3942" data-y="-1997" data-rotate="120" data-scale="1">
+        <q class="titre">شرط کافی برای تحدب در راستای یک یال</q>
+        <p>
+            چندجمله‌ای $p$ در راستای $$u=v_2-v_1$$ محدب است، هرگاه برای $$i+j+k=d-2$$ داشته باشیم
+            \begin{equation*}
+            \Delta_{21}^2c_{ijk}=c_{i,j+2,k}-2c_{i+1,j+1,k}+c_{i+2,j,k}.
+            \end{equation*}
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-4434" data-y="-2850" data-rotate="180" data-scale="1">
+        <q class="titre">شرط کافی برای تحدب در راستای دلخواه</q>
+        <p>
+            فرض کنید
+            \begin{equation}
+            \label{eqn_3.8}
+            u=\eta_2(v_2-v_1) + \eta_3(v_3-v_1)
+            \end{equation}
+            برای اعدادی حقیقی $\eta_2$ و $\eta_3$. آنگاه $p$ در جهت $u$ محدب است، هرگاه
+            \begin{equation}
+            \label{eqn_3.9}
+            \begin{bmatrix}
+            \eta_2 & \eta_3
+            \end{bmatrix} A_{ijk}\begin{bmatrix}
+            \eta_2\\ \eta_3
+            \end{bmatrix}\ge 0,\quad i+j+k=d-2
+            \end{equation}
+            که
+            \begin{equation}
+            \label{eqn_3.10}
+            A_{ijk} = \begin{bmatrix}
+            \bigtriangleup_{21}^2c_{ijk} & \bigtriangleup_{21}\bigtriangleup_{31}c_{ijk} \\
+            \bigtriangleup_{21}\bigtriangleup_{31}c_{ijk} & \bigtriangleup_{31}^2c_{ijk}
+            \end{bmatrix}.
+            \end{equation}
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-3942" data-y="-3702" data-rotate="240" data-scale="1">
+        <q class="titre">چندجمله‌ای‌های $q_m(t)$</q>
+        <p>
+            تعریف می‌کنیم:
+            $$q_m(t) = a_mt^2 + 2b_mt(1-t) + c_m(1-t)^2,\quad m=1,2,3$$
+            که در آن:
+            $$
+            a_1=\bigtriangleup_{21}^2c_{ijk},\ b_1=\bigtriangleup_{21}\bigtriangleup_{31}c_{ijk},\ c_1=\bigtriangleup_{31}^2c_{ijk},
+            $$
+            $$            
+            a_2=\bigtriangleup_{32}^2c_{ijk},\ b_2=\bigtriangleup_{32}\bigtriangleup_{12}c_{ijk},\ c_2=\bigtriangleup_{21}^2c_{ijk},
+            $$
+            $$
+            a_3=\bigtriangleup_{13}^2c_{ijk},\ b_3=\bigtriangleup_{13}\bigtriangleup_{23}c_{ijk},\ c_3=\bigtriangleup_{23}^2c_{ijk}.
+            $$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-2958" data-y="-3702" data-rotate="300" data-scale="1">
+        <q class="titre">شرط معادل برای شرط کافی تحدب</q>
+        <p style="text-align: center; color: green; font-size: 50px">
+            ماتریس $$A_{ijk}$$ معین نامنفی است اگر و تنها اگر $$q_m(t)\ge 0$$ برای $m=1,2,3$ و هر $0\le t\le 1$.
+        </p>
+    </div>
+
+    <div class="step slide" style="text-align: center" data-x="4000" data-y="-1700" data-z="7000" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="5">
+        <q class="titre">تاکنون…</q>
+        <p>
+            ساخت فضاهای اسپلاین با استفاده از مثلث‌سازی دامنه
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            تعریف شرط‌های درونیابی و همواری فضاهای اسپلاین به صورت دستگاه معادلات خطی
+            $$Ac = 0, Bc = z$$
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            ارائه‌ی شروط غیرخطی تحدب $q_m(t)$
+        </p>
+    </div>
+
+    <div id="overview" class="step green" data-x="2000" data-y="-1500" data-scale="10">
+    </div>
 </div>
-<div class="progress"><div></div></div>    
 <script src="https://raw.githubusercontent.com/meysampg/meysampg.github.io/master/science/thesis/master/presentation/js/impress.min.js"></script>
     <script>impress().init();</script>
 </body>
