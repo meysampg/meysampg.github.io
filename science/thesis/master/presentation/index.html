@@ -8,8 +8,8 @@
     
     <meta name="description" content="In this work, we aim to construct interpolating splines, which preserves convexity of the original data. To do so we mention that why we need two-dimensional shape-preserving interpolation and why the one-dimensional techniques cannot be used here. In the sequel, the abstract spaces and tools, which are needed for setting the scene, are introduced. The most important tool is triangulation, which is one of interesting and open problems of computational geometry. Triangulation gives us the opportunity to look at the points in the plane from Barycentric coordinates, which is a local coordinate and allows us to use new bases of two-variable polynomials. These are actually
 two-variable Bernstein bases and a natural extension of the one-variable case. This new basis is used to have Bernstein-Bezier representation of polynomials. Using this new representation, concepts like directional derivative, smoothness and convexity conditions are revisited. The convexity conditions are non-linear equations and for linearising, we use blossoming. This tool makes it possible to transform a one-variable polynomial to a several-variable function of monomials. This thesis concludes with numerical examples of implementing the mentioned algorithms." />
-    <meta name="author" content="Meysam Piur Ganji" />
-    <link href='http://awebfont.ir/css?id=1776' rel='stylesheet' type='text/css'>
+    <meta name="author" content="Meysam Pour Ganji" />
+    
     <link href="css/impress.css" rel="stylesheet" />
     <link href="css/impress-progress.css" rel="stylesheet" />
     <link href="css/substep.css" rel="stylesheet" />
@@ -21,9 +21,6 @@ two-variable Bernstein bases and a natural extension of the one-variable case. T
         MathJax.Hub.Config({
             tex2jax: {inlineMath: [['$','$']]}
         });
-        MathJax.Hub.Queue(
-          ["setRenderer",MathJax.Hub,"SVG"]
-        );
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
@@ -60,7 +57,7 @@ two-variable Bernstein bases and a natural extension of the one-variable case. T
             $$f(x_i,y_i) = z_i,\quad i=1,\dots,n$$
         </p>
         <p class="substep">
-            فضای چندجمله‌ای دومتغیره $\mathcal{P}_d$: فضای برداری توابع حقیقی‌مقدار به شکل
+            فضای چندجمله‌ای دومتغیره $\mathcal{P}_d$: فضای برداری توابعی حقیقی‌مقدار به شکل
             $$p(x,y) = c_{ij}x^iy^j,\quad 0\le i+j \le d$$
         </p>
     </div>
@@ -245,7 +242,7 @@ $$\Omega=\cup_{i=1}^NT_i$$
         <q class="titre">مشتق جهتی</q>
         <p>
         <span style="color: green">تعریف)</span>
-        $$D_uf(v) = \frac{d}{dt}(v + tu)|_{t=0}$$
+        $$D_uf(v) = \frac{d}{dt}f(v + tu)|_{t=0}$$
         </p>
         <p class="substep">
         <span style="color: red">مختصات جهتی</span>
@@ -461,10 +458,155 @@ $$\tilde{c}_{njk} = \sum_{\nu+\mu+\kappa=n}c_{\nu,k+\mu,j+\kappa}B_{\nu\mu\kappa
         </p>
     </div>
 
+    <div class="step slide" data-x="-1958" data-y="-4702" data-rotate="0" data-scale="1">
+        <q class="title">بلازم</q>
+    </div>
+
+    <div class="step slide" data-x="-958" data-y="-4502" data-rotate="0" data-scale="1">
+        <q class="titre">انگیزه‌ی تعریف</q>
+        <p>
+            $$
+            L(\lambda x+y) = \lambda L(x) + L(y), \quad\forall x,y\in \mathcal{V},\forall\lambda\in\mathbb{R}
+            $$
+            $$
+            L(\lambda x+(1-\lambda)y) = \lambda L(x) + (1-\lambda)L(y)$$
+            $$
+            \forall x,y\in \mathcal{V},\forall\lambda\in[0,1]
+            $$
+        </p>
+        <p class="substep">
+            \begin{equation*}
+            {P(t) = a_nx^n + \dots + a_1x+a_0}
+            \end{equation*}
+            \begin{equation*}
+            \downarrow
+            \end{equation*}
+            \begin{equation*}
+            {p(t_1,\dots,t_n)}
+            \end{equation*}
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-958" data-y="-5302" data-rotate="0" data-scale="1">
+        <q class="titre">تعریف بلازم</q>
+        <p>
+            <span style="color: green">تقارن)</span>
+            $${p(t_1,\dots,t_n) = p(t_{\sigma(1)},\dots,t_{\sigma(n)})}$$
+        </p>
+        <p>
+            <span style="color: green">آفینی بودن)</span>
+            $$p(t_1,\dots,(1-\alpha)t_k+\alpha s_k,\dots,u_n) =$$
+            
+            $$(1-\alpha) p(t_1,\dots,{\color{greendark}t_k},\dots,t_n)+ \alpha p(t_1,\dots,{\color{greendark}s_k},\dots,t_n)$$
+        </p>
+        <p>
+        <span style="color: green">قطری بودن)</span>
+            $$p(t,\dots,t) = P(t)$$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="58" data-y="-4702" data-rotate="0" data-scale="1">
+        <q class="titre">بلازم تک‌جمله‌ای‌ها</q>
+        <p>
+            گیریم $M_k^n(t) = t^k$ یک تک‌جمله‌ای از درجه‌ی $k$ به عنوان یک چندجمله‌ای درجه‌ی $n$ باشد. در اینصورت بلازم $M_k^n$ که آنرا با $m_k^n$ نمایش می‌دهیم، به صورت زیر خواهد بود:
+            \begin{equation*}
+            m_k^n(t_1,\dots,t_n) = \frac{\sum t_{i_1}\dots t_{i_k}}{\begin{pmatrix}
+            n\\ k
+            \end{pmatrix}}
+            \end{equation*}
+            که در آن حاصلجمع بر همه‌ی زیرمجموعه‌های مانند $\{i_1,\dots,i_k\}$ از $\{1,\dots,n\}$ است.
+        </p>
+    </div>
+
+    <div class="step slide" data-x="58" data-y="-3902" data-rotate="0" data-scale="1">
+        <q class="titre">بلازم $q_m(t)$ها</q>
+        <center>
+        <p>
+            شروط غیرخطی تحدب را به صورت زیر تعریف کردیم:
+            $$q_m(t) = a_mt^2 + 2b_mt(1-t) + c_m(1-t)^2,\quad m=1,2,3$$
+            بلازم این شروط، به صورت زیر بدست می‌آید:
+        </p>
+        <p style="font-size:26px !important;">
+            $$r_m(t_1,t_2)=a_mt_1t_2+b_m\left(t_1(1-t_2)+t_2(1-t_1)\right) + c_m(1-t_1)(1-t_2)$$
+        </p>
+        </center>
+        <p>
+            بنا بر تعریفمان از $a_m$، $b_m$ و $c_m$ها، آنها توابعی خطی از $B$-ضرایب هستند.
+            $$
+            a_1=\bigtriangleup_{21}^2c_{ijk},\ b_1=\bigtriangleup_{21}\bigtriangleup_{31}c_{ijk},\ c_1=\bigtriangleup_{31}^2c_{ijk},
+            $$
+            $$            
+            a_2=\bigtriangleup_{32}^2c_{ijk},\ b_2=\bigtriangleup_{32}\bigtriangleup_{12}c_{ijk},\ c_2=\bigtriangleup_{21}^2c_{ijk},
+            $$
+            $$
+            a_3=\bigtriangleup_{13}^2c_{ijk},\ b_3=\bigtriangleup_{13}\bigtriangleup_{23}c_{ijk},\ c_3=\bigtriangleup_{23}^2c_{ijk}.
+            $$
+        </p>
+    </div>
+
+    <div class="step slide" data-x="-958" data-y="-3702" data-rotate="0" data-scale="1">
+        <q class="titre">ساخت شروط خطی با استفاده از بلازم $q_m(t)$</q>
+        <p>
+            فرض کنیم اعداد دلخواه صحیح مثبت $n_1$، $n_2$ و $n_3$ و
+            $\mathcal{X}=\{x_i\}_{i=0}^{n_1}$،
+            $\mathcal{Y}=\{y_i\}_{i=0}^{n_2}$ و 
+            $\mathcal{Z}=\{z_i\}_{i=0}^{n_3}$
+            که
+            \begin{equation*}
+            0=x_0< x_1<\dots< x_{n_1}=1,
+            0=y_0< y_1<\dots< y_{n_2}=1,
+            \end{equation*}
+            \begin{equation*}
+            0=z_0< z_1<\dots< z_{n_3}=1
+            \end{equation*}
+            مفروض باشند.
+            در این صورت، شرط‌های
+            \begin{eqnarray}
+            r_1(x_{i-1},x_i)\ge 0,\quad i=1,\dots,n_1\nonumber\\
+            \label{eqn_b_2.12}
+            r_2(y_{i-1},y_i)\ge 0,\quad i=1,\dots,n_2\\
+            r_3(z_{i-1},z_i)\ge 0,\quad i=1,\dots,n_3\nonumber
+            \end{eqnarray}
+            نتیجه می‌دهد که ماتریس $A_{ijk}$ معین نامنفی است.
+        </p>
+    </div>
+
+    <div class="step slide" data-x="58" data-y="-3102" data-rotate="0" data-scale="1">
+        <q class="titre">یک نمونه از ساخت شروط تحدب</q>
+        <p>
+            قرار می‌دهیم $\mathcal{X} = \mathcal{Y} = \mathcal{Z} = \{0,1\}$، در اینصورت:
+            $$r_m(0,1)=b_m\ge 0,\quad m=1,2,3.$$
+            بنابراین شروط
+            \begin{equation}
+            \label{eqn_b_2.14}
+            \bigtriangleup_{21}\bigtriangleup_{31}c_{ijk}\ge 0,\quad\bigtriangleup_{32}\bigtriangleup_{12}c_{ijk}\ge 0,\quad \bigtriangleup_{13}\bigtriangleup_{23}c_{ijk}\ge 0
+            \end{equation}
+            تحدب اسپلاین را حفظ می‌کنند.
+        </p>
+        <p class="substep">
+            این قیود خطی را می‌توان به صورت $$Cc\ge 0$$ نمایش داد.
+        </p>
+    </div>
+
+    <div class="step slide" style="text-align: center" data-x="4000" data-y="700" data-z="-700" data-rotate-x="-90" data-rotate-y="90" data-rotate-z="90" data-scale="5">
+        <q class="titre">در نهایت!</q>
+        <p>
+            ساخت فضاهای اسپلاین با استفاده از مثلث‌سازی دامنه
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            تعریف شرط‌های درونیابی و همواری فضاهای اسپلاین به صورت دستگاه معادلات خطی $Ac = 0, Bc = z$ و شروط تحدب غیرخطی $q_m(t)$.
+        </p>
+        <p class="substep">
+            $$\downarrow$$
+            ارائه‌ی شروط خطی $Cc\ge 0$ با استفاده از بلازم و شروط غیرخطی $q_m(t)$.
+        </p>
+    </div>
+
     <div id="overview" class="step green" data-x="2000" data-y="-1500" data-scale="10">
     </div>
 </div>
 <script src="http://pourganji.ir/science/thesis/master/presentation/js/impress.min.js"></script>
-    <script>impress().init();</script>
+<script>impress().init();</script>
 </body>
 </html>
