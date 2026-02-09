@@ -1,5 +1,9 @@
 baseURL = "https://pourganji.ir/blog/"
 publishDir = "../blog"
-languageCode = 'en-us'
+languageCode = 'fa-IR'
 title = 'My New Hugo Site'
-theme = 'ananke'
+theme = 'paper'
+
+[params]
+    color = 'gray'
+    direction = "rtl"
