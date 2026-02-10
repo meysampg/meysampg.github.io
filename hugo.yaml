@@ -1,12 +1,75 @@
 baseURL: https://pourganji.ir/
-title: 'پکت سینک'
-languageCode: fa
+title: 'SYN Packet'
+languageCode: fa-IR
 
 theme: PaperMod
 publishDir: ./docs
 cleanDestinationDir: true
 enableRobotsTXT: true
+defaultContentLanguage: fa
+defaultContentLanguageInSubdir: true
+enableInlineShortcodes: true
+
+languages:
+  fa:
+    languageName: "Farsi"
+    weight: 1
+    menu:
+      main:
+        - name: درباره
+          url: about/
+          weight: 5
+        - name: بلاگ
+          url: blog/
+          weight: 7
 
 pagination:
     pagerSize: 10
 
+params:
+    env: production
+    keywords: [Blog, OpenSource, Coding, Golang, Programming]
+    author: "میثم پورگنجی"
+    defaultTheme: auto
+    disableThemeToggle: true
+
+    ShowToc: true
+    TocOpen: false
+    ShowBreadCrumbs: true
+    ShowReadingTime: false
+    ShowPostNavLinks: true
+    ShowShareButtons: false
+    ShowCodeCopyButtons: true
+
+    editPost:
+        URL: "https://github.com/meysampg/meysampg.github.io/edit/master/content"
+        Text: "پیشنهاد تغییر"
+        appendFilePath: true
+
+    homeInfoParams:
+        Title: "میثم پورگنجی"
+        Content: "From Freedom Came Elegance"
+
+    profileMode:
+        enabled: true
+        title: "میثم پورگنجی"
+        subtitle: "From Freedom Came Elegance"
+        imageUrl: "https://avatars.githubusercontent.com/u/1416085?v=4"
+        imageTitle: "avatar"
+        imageWidth: 140
+        imageHeight: 140
+        buttons:
+            - name: "بلاگ"
+              url: "/fa/blog"
+
+    socialIcons:
+        - name: github
+          url: "https://github.com/meysampg"
+        - name: RSS
+          url: "index.xml"
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
