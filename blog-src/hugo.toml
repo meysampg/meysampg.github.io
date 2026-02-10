@@ -1,7 +1,7 @@
 baseURL = "https://pourganji.ir/blog/"
 publishDir = "../blog"
 languageCode = 'fa-IR'
-title = 'My New Hugo Site'
+title = ''
 theme = 'paper'
 
 [params]
