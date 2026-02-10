@@ -3,7 +3,7 @@ title: 'پکت سینک'
 languageCode: fa
 
 theme: PaperMod
-publishDir: ./public
+publishDir: ./docs
 cleanDestinationDir: true
 enableRobotsTXT: true
 
