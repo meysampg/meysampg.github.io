@@ -21,7 +21,7 @@ languages:
           weight: 5
         - name: بلاگ
           url: blog/
-          weight: 7
+          weight: 2
 
 pagination:
     pagerSize: 10
