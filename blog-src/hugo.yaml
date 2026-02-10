@@ -1,0 +1,12 @@
+baseURL: https://pourganji.ir/blog/
+title: 'پکت سینک'
+languageCode: fa
+
+theme: PaperMod
+publishDir: ../blog
+cleanDestinationDir: true
+enableRobotsTXT: true
+
+pagination:
+    pagerSize: 10
+
