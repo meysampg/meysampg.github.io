@@ -5,13 +5,10 @@ IFS=$'\n\t'
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-cd blog-src
-
 # Build the project.
-hugo
+hugo --minify
 
 # Add changes to git.
-cd ..
 git add -A
 
 # Commit changes.

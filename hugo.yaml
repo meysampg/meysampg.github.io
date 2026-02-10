@@ -1,9 +1,9 @@
-baseURL: https://pourganji.ir/blog/
+baseURL: https://pourganji.ir/
 title: 'پکت سینک'
 languageCode: fa
 
 theme: PaperMod
-publishDir: ../blog
+publishDir: ./public
 cleanDestinationDir: true
 enableRobotsTXT: true
 
