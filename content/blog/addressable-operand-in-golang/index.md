@@ -2,6 +2,11 @@
 date: '2017-09-10T15:39:11+03:30'
 draft: false
 title: 'آدرس‌پذیری در گو'
+categories:
+  - Software
+  - Internal of Things
+tags:
+  - Go
 ---
 دیو چنی توییت کرده که کد زیر چی چاپ میکنه؟
 
