@@ -31,10 +31,10 @@ params:
     keywords: [Blog, OpenSource, Coding, Golang, Programming]
     author: "میثم پورگنجی"
     defaultTheme: auto
-    disableThemeToggle: true
+    disableThemeToggle: false
 
     ShowToc: true
-    TocOpen: false
+    TocOpen: true
     ShowBreadCrumbs: true
     ShowReadingTime: false
     ShowPostNavLinks: true
